@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<style>
+    @font-face {
+        font-family:"White Rabbit";
+        src:url("SMAWS/fonts/WhiteRabbit.ttf") format("truetype"),
+            url("SMAWS/fonts/WhiteRabbit.eot") format("eot");
+    }
+    @font-face { font-family:"Franklin";   /* Book */
+                         src:url("SMAWS/fonts/franklingothic-book-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-book-webfont.woff") format("woff");
+                 font-weight:normal;
+                  font-style:normal;}
+    @font-face { font-family:"Franklin";   /* Medium */
+                         src:url("SMAWS/fonts/franklingothic-med-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-med-webfont.woff") format("woff");
+                 font-weight:500;
+                  font-style:normal; }
+    @font-face { font-family:"Franklin";   /* Demi */
+                         src:url("SMAWS/fonts/franklingothic-demi-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-demi-webfont.woff") format("woff");
+                 font-weight:bold;
+                  font-style:normal; }
+
+    html {
+        height:100%;
+    }
+    body {
+        display:flex;
+        flex-flow:column nowrap;
+        justify-content:space-between;
+        align-items:center;
+        overflow: hidden;
+        width: 100%;
+        height:100%;
+        margin:  0;
+        padding: 0;
+        background:#FEFEFE;
+        background-image:url("SMAWS/groovepaper.png");
+    }
+    header, footer {
+        flex:0 0 auto;
+        height:38px;
+        display:flex;
+        flex-flow:column nowrap;
+        align-items:center;
+        width:100%;
+        background-color:black;
+    }
+    svg { flex:1 1 auto; }
+
+    h2, p {
+        max-width:38em;
+        font-family:"Franklin";
+        color:black;
+    }
+    h2 { margin:12px 6px 0 6px; font-size:1.33em;}
+    p  { margin: 6px 6px 0 8px; }
+
+    text {
+        font-family:"White Rabbit";
+        font-size:24pt;
+        fill:#00FF00;
+        filter:url(#glow);
+    }
+    .border {
+        fill:url(#bord);
+        filter:url(#glow);
+    }
+    .none { opacity:0; pointer-events:visible; }
+</style>
+<body>
+<header>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 562.5 38"
+        cursor="default" pointer-events="none">
+        <defs>
+            <filter id="glow" style="color-interpolation-filters:sRGB;">
+              <feGaussianBlur in="SourceGraphic" result="r1" stdDeviation="1.3"/>
+              <feColorMatrix  in="SourceGraphic" result="r2"
+                          values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 " />
+              <feComposite operator="in" in="r1" in2="r2"/>
+            </filter>
+            <linearGradient id="bord" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#00FF00" offset="0"/>
+                <stop stop-color="#00CC00" offset="0.5"/>
+                <stop stop-color="#00FF00" offset="1"/>
+            </linearGradient>
+            <linearGradient id="share" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#008800" offset="0"/>
+                <stop stop-color="#00FF00" offset="1"/>
+            </linearGradient>
+        </defs>
+        <text x="18.75" y="28">bIO - The Sideways Biography</text>
+    </svg>
+</header>
+<div style="flex:1 1 auto; margin:8px 0 8px 0; overflow-y:auto;">
+    <p style="text-indent:-3.25em; font-family:monospace; font-size:18px; margin:0 2em 1em 3.25em;">
+        NOTE: I can only vouch for this site working properly in Chrome. It might work
+        in other browsers, it might not. I'm just one guy juggling too many balls. I'll
+        post updates when I have them. You can click
+        <a href="https://www.google.com/chrome/">here</a> to download Chrome.
+    </p>
+</div>
+<footer>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 334.5 38"
+         cursor="default" pointer-events="none">
+
+        <g transform="translate(0 3)">
+            <rect y="-3" width="32" height="38" class="none"/>
+            <path fill="#00FF00" filter="url(#glow)" fill-rule="evenodd"
+                  d="M4,17 L 4,28 S4,30 6,30 L26,30 S28,30 28,28 L28,17 29,18
+                     S31.06,17.94 31.12,15.88 L17.12,1.88 S16,0.88 14.88,1.88
+                     L0.88,15.88 S0.94,17.94 3,18 Z
+                     M7,14 L7,27 12,27 12,15 S12,14 13,14 L19,14 S20,14 20,15
+                     L20,27 25,27 25,14 16,5 Z M14,16 L14,27 18,27 18,16 Z"/>
+        </g>
+
+        <g> <text x= "47" y="28">FAQ</text>
+            <rect x= "47" y="30" width="56" height= "3" ry="2" rx="2" class="border"/>
+            <rect x= "47" y= "0" width="56" height="38" id="faq"      class="none"></rect>
+        </g>
+
+        <g> <text x="122" y="28">FUQ</text>
+            <rect x="122" y="30" width="56" height= "3" ry="2" rx="2" class="border"/>
+            <rect x="122" y= "0" width="56" height="38" id="bio"      class="none"></rect>
+        </g>
+
+        <g> <text x="197" y="28">smaws</text>
+            <rect x="197" y="30" width="93.75" height= "3" ry="2" rx="2" class="border"/>
+            <rect x="197" y= "0" width="93.75" height="38" id="smaws"    class="none"></rect>
+        </g>
+
+         <g fill="url(#share)" filter="url(#glow)" transform="translate(304 3)">
+             <rect x="-1" y="-3" width="32" height="38" class="none"/>
+             <g transform="translate(0.5 1.5) scale(1.2 1.2)">
+                 <path d="M 3,11 L 21, 2.5 21, 4.5 5,12
+                          21,19.5 21,21.5 3,13 Z"/>
+                 <circle cx= "3" cy="12"   r="3.33"/>
+                 <circle cx="21" cy= "3.5" r="3.33"/>
+                 <circle cx="21" cy="20.5" r="3.33"/>
+             </g>
+         </g>
+    </svg>
+</footer>
+</body>
+</html>

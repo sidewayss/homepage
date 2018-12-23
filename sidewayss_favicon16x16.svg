@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 260 260">
+    <title>Sideways S Favicon</title>
+    <defs>
+        <linearGradient id="grad" x1="0" y1="0" x2="1209"  y2="260" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#00BB00" stop-opacity="0.44" offset="0.093"/>
+          <stop stop-color="#00AA00" stop-opacity="1"    offset="0.343"/>
+          <stop stop-color="#00AA00" stop-opacity="1"    offset="0.75"/>
+          <stop stop-color="#00BB00" stop-opacity="0.44" offset="1"/>
+        </linearGradient>
+        <filter id="glow" style="color-interpolation-filters:sRGB;">
+          <feGaussianBlur in="SourceGraphic" result="r1" stdDeviation="3"/>
+          <feColorMatrix  in="SourceGraphic" result="r2"
+                      values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 " />
+          <feComposite operator="in" in="r1" in2="r2"/>
+        </filter>
+        <path id="s" transform="scale(-0.25 0.25)"
+              d="M390 390
+                q-117 0 -204.5 88
+                t-87.5 205
+                t87.5 204.5
+                t204.5 87.5
+
+                h585
+                q39 0 68.5 -29
+                t29.5 -68
+                t-29.5 -68.5
+                t-68.5 -29.5
+
+                h-585
+                q-39 0 -68 -29
+                t-29 -68
+                t29 -68.5
+                t68 -29.5
+
+                h390
+                q117 0 205 -87.5
+                t88 -204.5
+                t-88 -205
+                t-205 -88
+
+                h-585
+                q-39 0 -68 29.5
+                t-29 68.5
+                t29 68
+                t68 29
+
+                h585
+                q39 0 68.5 29.5
+                t29.5 68.5
+                t-29.5 68
+                t-72.5 29
+                h-386z"/>
+    </defs>
+    <use xlink:href="#s" x="277"  y="8.15" fill="url(#grad)" transform="rotate(90 130 130)"/>
+<!--
+<rect width="260" height="260"/>
+<path stroke="green" stroke-width="48.5" d="M0,130 L260,130 M130,0 L130,260"/>
+-->
+</svg>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<style>
+    @font-face {
+        font-family:"White Rabbit";
+        src:url("SMAWS/fonts/WhiteRabbit.ttf") format("truetype"),
+            url("SMAWS/fonts/WhiteRabbit.eot") format("eot");
+    }
+    @font-face { font-family:"Franklin";   /* Book */
+                         src:url("SMAWS/fonts/franklingothic-book-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-book-webfont.woff") format("woff");
+                 font-weight:normal;
+                  font-style:normal;}
+    @font-face { font-family:"Franklin";   /* Medium */
+                         src:url("SMAWS/fonts/franklingothic-med-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-med-webfont.woff") format("woff");
+                 font-weight:500;
+                  font-style:normal; }
+    @font-face { font-family:"Franklin";   /* Demi */
+                         src:url("SMAWS/fonts/franklingothic-demi-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-demi-webfont.woff") format("woff");
+                 font-weight:bold;
+                  font-style:normal; }
+
+    html {
+        height:100%;
+    }
+    body {
+        display:flex;
+        flex-flow:column nowrap;
+        justify-content:space-between;
+        align-items:center;
+        overflow: hidden;
+        width: 100%;
+        height:100%;
+        margin:  0;
+        padding: 0;
+        background:#FEFEFE;
+        background-image:url("SMAWS/groovepaper.png");
+    }
+    header, footer {
+        flex:0 0 auto;
+        height:38px;
+        display:flex;
+        flex-flow:column nowrap;
+        align-items:center;
+        width:100%;
+        background-color:black;
+    }
+    svg { flex:1 1 auto; }
+
+    h2, p {
+        max-width:38em;
+        font-family:"Franklin";
+        color:black;
+    }
+    h2 { margin:12px 6px 0 6px; font-size:1.33em;}
+    p  { margin: 6px 6px 0 8px; }
+    .bullet {
+         margin:6px 1em 0 2em;
+         text-indent:-1em;
+    }
+
+    text {
+        font-family:"White Rabbit";
+        font-size:24pt;
+        fill:#00FF00;
+        filter:url(#glow);
+    }
+    .border {
+        fill:url(#bord);
+        filter:url(#glow);
+    }
+    .none { opacity:0; pointer-events:visible; }
+</style>
+<body>
+<header>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 637.5 38"
+        cursor="default" pointer-events="none">
+        <defs>
+            <filter id="glow" style="color-interpolation-filters:sRGB;">
+              <feGaussianBlur in="SourceGraphic" result="r1" stdDeviation="1.3"/>
+              <feColorMatrix  in="SourceGraphic" result="r2"
+                          values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 " />
+              <feComposite operator="in" in="r1" in2="r2"/>
+            </filter>
+            <linearGradient id="bord" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#00FF00" offset="0"/>
+                <stop stop-color="#00CC00" offset="0.5"/>
+                <stop stop-color="#00FF00" offset="1"/>
+            </linearGradient>
+            <linearGradient id="share" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#008800" offset="0"/>
+                <stop stop-color="#00FF00" offset="1"/>
+            </linearGradient>
+        </defs>
+        <text x="18.75" y="28">FAQ - Frequently Asked Questions</text>
+    </svg>
+</header>
+<div style="flex:1 1 auto; margin:8px 0 8px 0; overflow-y:auto;">
+
+    <p>Please click on ads, it's how I make enough money to do this for a living.</p>
+
+    <h2  id="IOR-OOR">What is In One eaR &#x2192; Out the OtheR?</h2>
+    <div id="IOR-OOR-p">
+        <p>It is an album of songs, in a format that merges these two dictionary
+           definitions of "album":</p>
+        <p class="bullet">&#x2022; A scrapbook, a binder for storing and
+                          organizing keepsakes and mementos</p>
+        <p class="bullet">&#x2022; A collection of audio recordings packaged
+                          together on a disk, download, or other digital storage
+                          medium</p>
+        <p>Like a scrapbook, the empty "pages" in this album will be filled in
+           gradually over the course of (hopefully) several years. The current
+           schedule amounts to a song a month, though I'll be pairing most of
+           the songs as A/B sides, and releasing two songs every two months. At
+           the time of the initial release, I have eleven songs that I am
+           committed to releasing. Over the course of the next eleven months I
+           hope to gain enough traction (and money) to continue beyond that.</p>
+        <p>It's a public scrapbook, and I am taking an extra step in that
+           direction by publishing all the individual audio tracks and DAW
+           sessions for anyone to download, remix, and republish. I want to
+           encourage people to screw around with my material. I may not
+           personally enjoy every remix or cover version of my songs, but who
+           cares about my opinion?&ensp;I don't, and you certainly shouldn't. I
+           want to encourage people to experiment freely and unabashedly. The
+           material lends itself to a certain lack of restraint, and I want
+           people to have fun with it.</p>
+        <p>In my mind, this all the remixes and other remakes of my material are
+           part of the album. My current situation makes hosting all of that
+           implausible, so I am currently relying on external platforms for all
+           of that infrastructure. You can download tracks at
+           blend.io, here.  [WHERE and HOW TO POST YOUR REMIXES, ETC.]</p>
+    </div>
+
+    <h2  id="downstream">Where can I download/stream the music and videos?</h2>
+    <div id="downstream-p"></div>
+
+    <h2  id="next">When is the next release, and what are the song titles?</h2>
+    <p   id="next-p">The next release is MM/DD/YYYY, and it includes the songs A
+       and B. For regular updates follow me on twitter and/or facebook, etc.</p>
+
+    <h2  id="censor">What's the deal with censorship?</h2>
+    <div id="censor-p">
+        <p>I understand that many people don't enjoy foul language, my mother
+           included. I also respect the desires of parents to censor media for their
+           children. So in spite of the fact that I enjoy an overtly nasty turn of
+           phrase, I sympathize with those who don't, and I want them to be able to
+           enjoy this album too.</p>
+        <p>Rewriting the lyrics is much better than bleeping them out. In keeping
+           with the superficial nature of the album, I focus more on the rhymes and
+           general tone, rather than matching semantic meaning across the censored
+           and uncensored versions. That can make for some entertaining and
+           sometimes surprising semantics.</p>
+        <p>Add that all up and you get Sideways Skullfinger. It's a lot of extra
+           work for me, but I think it's worth it.</p>
+    </div>
+
+    <h2  id="spelunk">How do I use The Spelunker?</h2>
+    <p   id="spelunk-p">Yea, I'm working on some instructional materials, but they
+       are far from complete. Until you start downloading/streaming my music and
+       watching my videos on commercial sites, I am  broke, and I still have audio
+       and video productions to complete. Those productions take priority over
+       instructions in my workforce of one. For now, you're on your own. There's
+       nothing dangerous about it, so dive in and explore. You'll figure it out
+       in no time.</p>
+
+    <h2  id="audio">Why do you ask if I want to hear audio the first time I visit?</h2>
+    <p   id="audio-p">Because the browsers require it. See here and here...</p>
+
+    <h2  id="gpu">Why do your homepage animations look much better on my friend's computer?</h2>
+    <p   id="gpu-p">It's all about GPU.</p>
+</div>
+<footer>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 334.5 38"
+         cursor="default" pointer-events="none">
+
+        <g transform="translate(0 3)">
+            <rect y="-3" width="32" height="38" class="none"/>
+            <path fill="#00FF00" filter="url(#glow)" fill-rule="evenodd"
+                  d="M4,17 L 4,28 S4,30 6,30 L26,30 S28,30 28,28 L28,17 29,18
+                     S31.06,17.94 31.12,15.88 L17.12,1.88 S16,0.88 14.88,1.88
+                     L0.88,15.88 S0.94,17.94 3,18 Z
+                     M7,14 L7,27 12,27 12,15 S12,14 13,14 L19,14 S20,14 20,15
+                     L20,27 25,27 25,14 16,5 Z M14,16 L14,27 18,27 18,16 Z"/>
+        </g>
+
+        <g> <text x= "47" y="28">FUQ</text>
+            <rect x= "47" y="30" width="56" height= "3" ry="2" rx="2" class="border"/>
+            <rect x= "47" y= "0" width="56" height="38" id="faq"      class="none"></rect>
+        </g>
+
+        <g> <text x="122" y="28">bIO</text>
+            <rect x="122" y="30" width="56" height= "3" ry="2" rx="2" class="border"/>
+            <rect x="122" y= "0" width="56" height="38" id="bio"      class="none"></rect>
+        </g>
+
+        <g> <text x="197" y="28">smaws</text>
+            <rect x="197" y="30" width="93.75" height= "3" ry="2" rx="2" class="border"/>
+            <rect x="197" y= "0" width="93.75" height="38" id="smaws"    class="none"></rect>
+        </g>
+
+         <g fill="url(#share)" filter="url(#glow)" transform="translate(304 3)">
+             <rect x="-1" y="-3" width="32" height="38" class="none"/>
+             <g transform="translate(0.5 1.5) scale(1.2 1.2)">
+                 <path d="M 3,11 L 21, 2.5 21, 4.5 5,12
+                          21,19.5 21,21.5 3,13 Z"/>
+                 <circle cx= "3" cy="12"   r="3.33"/>
+                 <circle cx="21" cy= "3.5" r="3.33"/>
+                 <circle cx="21" cy="20.5" r="3.33"/>
+             </g>
+         </g>
+    </svg>
+</footer>
+</body>
+</html>

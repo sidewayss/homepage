@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<style>
+    @font-face {
+        font-family:"White Rabbit";
+        src:url("SMAWS/fonts/WhiteRabbit.ttf") format("truetype"),
+            url("SMAWS/fonts/WhiteRabbit.eot") format("eot");
+    }
+    /* Libertine for quotes */
+    @font-face {src:url("SMAWS/fonts/LinLibertine_R.woff")  format("woff");
+        font-family:"Libertine";
+        font-weight:normal;
+    }
+    @font-face { font-family:"Franklin";   /* Book */
+                         src:url("SMAWS/fonts/franklingothic-book-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-book-webfont.woff") format("woff");
+                 font-weight:normal;
+                  font-style:normal;}
+    @font-face { font-family:"Franklin";   /* Medium */
+                         src:url("SMAWS/fonts/franklingothic-med-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-med-webfont.woff") format("woff");
+                 font-weight:500;
+                  font-style:normal; }
+    @font-face { font-family:"Franklin";   /* Demi */
+                         src:url("SMAWS/fonts/franklingothic-demi-webfont.woff2") format("woff2"),
+                             url("SMAWS/fonts/franklingothic-demi-webfont.woff") format("woff");
+                 font-weight:bold;
+                  font-style:normal; }
+
+    html {
+        height:100%;
+    }
+    body {
+        display:flex;
+        flex-flow:column nowrap;
+        justify-content:space-between;
+        align-items:center;
+        overflow: hidden;
+        width: 100%;
+        height:100%;
+        margin:  0;
+        padding: 0;
+        background:#FEFEFE;
+        background-image:url("SMAWS/groovepaper.png");
+    }
+    header, footer {
+        flex:0 0 auto;
+        height:38px;
+        display:flex;
+        flex-flow:column nowrap;
+        align-items:center;
+        width:100%;
+        background-color:black;
+    }
+    svg { flex:1 1 auto; }
+
+    h2, p {
+        max-width:38em;
+        font-family:"Franklin";
+        color:black;
+    }
+    h2 { margin:12px 6px 0   6px; font-size:1.33em;}
+    p  { margin: 6px 6px 0   8px; }
+    .quote {
+        margin:  9px 6px 6px 8px;
+        font-family:Libertine;
+        font-size:1.031em;
+    }
+
+    text {
+        font-family:"White Rabbit";
+        font-size:24pt;
+        fill:#00FF00;
+        filter:url(#glow);
+    }
+    .border {
+        fill:url(#bord);
+        filter:url(#glow);
+    }
+    .none { opacity:0; pointer-events:visible; }
+</style>
+<body>
+<header>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 731.25 38"
+        cursor="default" pointer-events="none">
+        <defs>
+            <filter id="glow" style="color-interpolation-filters:sRGB;">
+              <feGaussianBlur in="SourceGraphic" result="r1" stdDeviation="1.3"/>
+              <feColorMatrix  in="SourceGraphic" result="r2"
+                          values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 " />
+              <feComposite operator="in" in="r1" in2="r2"/>
+            </filter>
+            <linearGradient id="bord" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#00FF00" offset="0"/>
+                <stop stop-color="#00CC00" offset="0.5"/>
+                <stop stop-color="#00FF00" offset="1"/>
+            </linearGradient>
+            <linearGradient id="share" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#008800" offset="0"/>
+                <stop stop-color="#00FF00" offset="1"/>
+            </linearGradient>
+        </defs>
+        <text x="18.75" y="28">FUQ - Frequently Unanswered Questions</text>
+    </svg>
+</header>
+<div style="flex:1 1 auto; margin:8px 0; overflow-y:auto;">
+    <p>In his National Book Award-winning novel <span style="font-weight:500;">
+       Gravity's Rainbow</span>, Thomas Pynchon wrote:</p>
+    <p class="quote">"If they can get you asking the wrong questions,
+                         they don't have to worry about answers."</p>
+    <p style="margin-top:8px;">An answer is one type of response.&#x2004;There
+       is more than one way to respond to a question without answering it.</p>
+    <h2 style="margin-top:8px; padding-top:6px; border-top:3px double;"
+      >1.&#x2004;Why?</h2>
+    <p>There might be times when I have an answer for a Why question, but
+       frequently I will not.&#x2004;Why questions often search for a deeper
+       understanding, more profound meaning.&#x2004;On a personal level, they
+       try to reveal intentions, motivations.</p>
+    <p><span style="font-weight:500;">
+        In One eaR &gt;&gt; Out the OtheR</span>&#x2004;is decidedly
+        shallow;&#x2004;and my intentions are a long, twisting conversation,
+        not an answer to a question.</p>
+    <h2>2.&#x2004;What was the inspiration for&#x2026;?</h2>
+    <p>Inspiration has nothing to do with this album.</p>
+    <h2>3.&#x2004;What is the song about?&#x2004;What do the lyrics mean?</h2>
+    <p>What do they mean to you?&#x2004;Asking me is pointless.&#x2004;Telling
+       me might be entertaining.</p>
+    <h2>4.&#x2004;How do I contact Sideways directly?</h2>
+    <p>Call me or message me anytime at +1 788-743-3465.</p>
+    <h2>5.&#x2004;Who is Sideways?</h2>
+    <p>Who's asking?</p>
+    <h2>6.&#x2004;Who is Martha Franklin?</h2>
+    <p>Good luck with that.</p>
+    <h2>7.&#x2004;Shouldn't "Skullfinger" be "Skullfingerer"?</h2>
+    <p>Shouldn't you have more important things on your mind?</p>
+    <h2>8.&#x2004;Are there subliminal messages embedded in the music?</h2>
+    <p>That's a great question.&#x2004;Thanks for asking.</p>
+    <h2>9.&#x2004;What is the proper pronunciation of "FUQ"?</h2>
+    <p>I'll have to leave that up to the W3C.</p>
+</div>
+<footer>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 334.5 38"
+         cursor="default" pointer-events="none">
+
+        <g transform="translate(0 3)">
+            <rect y="-3" width="32" height="38" class="none"/>
+            <path fill="#00FF00" filter="url(#glow)" fill-rule="evenodd"
+                  d="M4,17 L 4,28 S4,30 6,30 L26,30 S28,30 28,28 L28,17 29,18
+                     S31.06,17.94 31.12,15.88 L17.12,1.88 S16,0.88 14.88,1.88
+                     L0.88,15.88 S0.94,17.94 3,18 Z
+                     M7,14 L7,27 12,27 12,15 S12,14 13,14 L19,14 S20,14 20,15
+                     L20,27 25,27 25,14 16,5 Z M14,16 L14,27 18,27 18,16 Z"/>
+        </g>
+
+        <g> <text x= "47" y="28">FAQ</text>
+            <rect x= "47" y="30" width="56" height= "3" ry="2" rx="2" class="border"/>
+            <rect x= "47" y= "0" width="56" height="38" id="faq"      class="none"></rect>
+        </g>
+
+        <g> <text x="122" y="28">bIO</text>
+            <rect x="122" y="30" width="56" height= "3" ry="2" rx="2" class="border"/>
+            <rect x="122" y= "0" width="56" height="38" id="bio"      class="none"></rect>
+        </g>
+
+        <g> <text x="197" y="28">smaws</text>
+            <rect x="197" y="30" width="93.75" height= "3" ry="2" rx="2" class="border"/>
+            <rect x="197" y= "0" width="93.75" height="38" id="smaws"    class="none"></rect>
+        </g>
+
+         <g fill="url(#share)" filter="url(#glow)" transform="translate(304 3)">
+             <rect x="-1" y="-3" width="32" height="38" class="none"/>
+             <g transform="translate(0.5 1.5) scale(1.2 1.2)">
+                 <path d="M 3,11 L 21, 2.5 21, 4.5 5,12
+                          21,19.5 21,21.5 3,13 Z"/>
+                 <circle cx= "3" cy="12"   r="3.33"/>
+                 <circle cx="21" cy= "3.5" r="3.33"/>
+                 <circle cx="21" cy="20.5" r="3.33"/>
+             </g>
+         </g>
+    </svg>
+</footer>
+</body>
+</html>
