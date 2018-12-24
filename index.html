@@ -740,7 +740,7 @@ class Attr {                         // Attr: SVG attribute or CSS property ||||
     }                                // izByElm() helps let()
     static izByElm(v, c) { return Attr.dims(v) == (c ? 2 : 1); }
                             //////////\ vet(), net() are for unstructured values
-    vet(elms, v, m) {               //\ vet() "values" include function names
+    vet(elms, v, m) {               //\ vet() "values" include functions, text
         this.zvnet(false, elms, v, m);
     }
     net(elms, v, m, f = this.func) {//\ net() replaces only numbers
@@ -749,8 +749,12 @@ class Attr {                         // Attr: SVG attribute or CSS property ||||
     zvnet(isN, elms, v, m, f) {     //\ zvnet() consolidates vet() and net()
         let av, i, j, l, seps, vals, x;
         elms = this.constructor.elmArray(elms);
-        x    = isN ? this.getu(elms, f) : this.get(elms);
-        if (!Is.A(x)) x = [x];       // x = existing values
+        if (isN)
+           x = this.getu(elms, f)    // x = existing values;
+        else {
+           x = this.get(elms);
+           if (!Is.A(x)) x = [x];
+        }
         if (!Is.A(m)) m = [m];       // m = mask = array of indices into x[elm]
         if (!Is.A(v)) v = [v];
         else if (Is.A(v[0]))
@@ -918,12 +922,12 @@ class Attr {                         // Attr: SVG attribute or CSS property ||||
                 "matrix3d","rotate3d", "scale3d","skew"];
     }
     static _funcL() {                // functions that take <length> arguments
-        return ["perspective", "translate3d"];
+        return ["perspective", "translate3d", "translateX", "translateY"];
     }
     static _funcA() {                // functions that take <angle> arguments
         return ["rotateX","rotateY","rotateZ"];
     }
-    static _func2() {
+    static _func2() {                // no abbreviations
         return ["skewX","skewY"];
     }
     static _lengths () {             // units "class variables"
@@ -1463,8 +1467,8 @@ class Geaser extends Easer {         // Easer for CSS gradients and for the SVG
                 bi = b.false[j];     // j can start at -1
                 lp = m[j + 1] || v[i].length;
                 for (k = (j < 0 ? 0 : m[j] + 1); k < lp; k++)
-                    p[i][bi] += s[i][k] + v[i][k];
-                p[i][bi] += s[i][k];
+                    p[i][bi] += s[k] + v[k];
+                p[i][bi] += s[k];
             }
         }
         this.type = 2;               // always all 2D arrays
@@ -1480,7 +1484,8 @@ class Geaser extends Easer {         // Easer for CSS gradients and for the SVG
 ///////////////////////////////////////|||||||||||||||||||||||||||||||||||||||||
 class Teaser {                       // Easer for transforms, wraps 1+ Easers in
     constructor(ee, elms) {          // this.easers by Func instance.
-     let a, b, bfc, c, f, fc, fi, fn, func, i, l, m, max, min, p, pre, suf, val;
+        let a, b, bfc, c, f, fc, fi, fn, func, i, l, m, max, min, p, pre, suf;
+        let u, val;
         this.easee  = ee;
         this.elms   = elms;
         this.easers = new Map();     // key = Func, value = Easer
@@ -1554,10 +1559,13 @@ class Teaser {                       // Easer for transforms, wraps 1+ Easers in
                 m = Attr.svgRot(ee.attr.svg, fi, m, l, f, a, p);
                 b = Attr.toBools(m, c[i]);
             }
-            this.easers.set(fi,      // one easer per func
-                new Easer(ee, elms, fi,
-                          Is.A(ee.units) ? ee.units[i] : undefined,
-                          c[i], val[i], pre[i], suf[i], f, a, p, max, min, b));
+            u = ee.attr.unitz(fi);   // one easer per func
+            if (ee.units) {
+                if (!isA(ee.units))   u = ee.units
+                else if (ee.units[i]) u = ee.units[i];
+            }
+            this.easers.set(fi, new Easer(ee, elms, fi, u, c[i], val[i], pre[i],
+                                          suf[i], f, a, p, max, min, b));
         }
         Object.seal(this);
     }
@@ -2443,7 +2451,7 @@ function loadIt() {
     sizeSvg(bg.svg, i, i);                       // square portrait & landscape
     w = i * 10;                                  // huge, like the sky
     AT.w.set(bg.astro, w);
-    AT.h.set(bg.astro, i * 2);                   // 10:2 == 5:1 width:height
+    AT.h.set(bg.astro, w);
     i *= -1;
     bg.lastX = (w + i + i) * -1;                 // minimum translateX value
     bg.unitX =  1;
@@ -2523,11 +2531,14 @@ function loadIt() {
 
     // Launch it
     asp = vb[2] / vb[3];                         // target aspect ratio
-    windowResize();                              // sets the target style.height
     if (hasAgreed) {
+        windowResize(true);                      // sets the target style.height
         adjustWeave();                           // must follow windowResize()
         sizeOn();
     }
+    else
+        windowResize();
+
     RAF.func = reWind;                           // onresize throttled by RAF
     logNow("load");
     RAF.test(0, tester, 24, gpuAdjust, 3);
@@ -2845,19 +2856,22 @@ function reWind() {
 }
 function sizeOn()  { window   .addEventListener("resize", resizeWindow, false);}
 function sizeOff() { window.removeEventListener("resize", resizeWindow, false);}
-function windowResize() {
-
+function windowResize(isLoading) {   // isLoading = called by loadIt()
     mcW = main.clientWidth;
     mcH = main.clientHeight;
-    adjustBg();
-    if (!hasAgreed)
-        sizeAgree();
+    if (hasAgreed)
+        adjustBg(isLoading ? mcW : undefined);
+    else
+        sizeAgree();                 // sizeAgree() calls adjustBg() too
     return true;                     // tells RAF to loop one more time
 }
-function adjustBg() {                // #bg needs adjusting when window resizes
-    AT.w.set(bg.svg, mcW);
-//    AT.h.set(bg.svg, mcH);
-    AT.tSVG.let(bg.astro, mcH, EZ.y, FN.r);
+function adjustBg(w) {               // #bg needs adjusting when window resizes
+    AT.w.set(bg.svg, mcW);           // w arg defined by sizeAgree(), loadIt()
+//    AT.h.set(bg.svg, mcH);         //     undefined post-agreed()
+    if (w)
+        AT.tO.set(bg.astro, [mcW / 2, mcH], null, U.px);
+    else
+        AT.tO.net(bg.astro, mcH, EZ.y);
     adjustWeave();
 }
 function adjustWeave() {             // the #cloth filter is affected by size
@@ -2915,6 +2929,7 @@ function sizeTerms(elm) {
 }
 function sizeAgree() {
     let H, isH, n, svH, W;
+    adjustBg(mcW);
     AT.flex.cut(svg);
     AT.w   .cut(div);                // <style>#terms{width:100%}</style>
     AT.aS  .cut(typist.div);
@@ -3673,9 +3688,11 @@ function halfTime() {                // runs at mid-point of iAgree animation
 }
 ////////////////////////////////////////////////////////////////////////////////
 function agreed() {
-    let ez, ezTx, cues, i, l, w;
-    if (hasAgreed)
+    let ez, tz, cues, i, l, w;
+    if (hasAgreed) {
         clearInterval(beam.val);     // stop staticky()
+        AT.tO.set(bg.astro, [mcW / 2, mcH], E.px); // dup code from adjustBg()
+    }
     else {                           // virgin user
         if (RAF.gpu)
             clearInterval(glob.val); // stop grainy()
@@ -3715,15 +3732,18 @@ function agreed() {
     idler = Object.create(null);     // idler animations
     idler.idx   = 0;                 // idlers are ordinal then random order
     idler.eases = new Map();
-                                     // a multi-ease transform: FN.skewX + FN.t
-    ez   = Easy.create({time:2000, mid:1000, pause:0, end:90});
-    ezTx = Easy.create({time:15000, increment:-1});
-    ez.add({attr:AT.tSVG, func:[FN.rotate, FN.t], elm:bg.astro,
-                          mask:[EZ.deg, EZ.x], eases:[, ezTx]});
-    idler.eases.set(FN.rotate, ez);
-    idler.eases.set(FN.t,      ezTx);
+                                    // transformOrigin complements transform
+    ez = Easy.create({           time:10000, increment:1});
+    ez.add({attr:AT.tO, elm:bg.astro, set:E.net, mask:0});
+    idler.eases.set(AT.tO, ez);
+                                     // a multi-ease transform: FN.tX + FN.rZ
+    tz = Easy.create({           time:10000, increment:-1});
+    ez = Easy.create({wait:2000, time: 8000, end:90});
+    ez.add({attr:AT.tCSS, func:[FN.tX, FN.rZ], elm:bg.astro, eases:[tz]});
+    idler.eases.set(FN.rZ, ez);
+    idler.eases.set(FN.tX, tz);
 
-    bg.k3 = [35, -2.5];              // translate(bg.x) is via astroX()
+    bg.k3 = [35, -2.5];
     ez = Easy.create({time:15000, pow:3, peri:astroX, post:reverse});
     ez.addBy(AT.k1, A.k1, 9);
     ez.addBy(AT.k2, A.k2, 9);
@@ -3805,8 +3825,9 @@ function idle(isNow) {
 function startIdler(i) {
     switch (i) {                     // some comments are for ordinal order only
     case  0:                         // astro translate + skewX
-        RAF.eases.push(idler.eases.get(FN.t));
-        RAF.eases.push(idler.eases.get(FN.skewX));
+        RAF.eases.push(idler.eases.get(AT.tO));
+        RAF.eases.push(idler.eases.get(FN.tX));
+        RAF.eases.push(idler.eases.get(FN.rZ));
         break;
     case  1:                         // star brightness and whiteness
 //        RAF.eases.push(idler.eases.get(AT.k1));
